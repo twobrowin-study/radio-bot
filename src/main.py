@@ -16,8 +16,9 @@ from radio.application import RadioApplication
 
 from handlers.error import error_handler
 from handlers.help import help_handler, HELP_COMMAND
-from handlers.audio import audio_types_handler
+from handlers.audio_types import audio_types_handler
 from handlers.run_immediately import run_immediately_callback_handler, RUN_IMMEDIATELY
+from handlers.stop_play import stop_play_callback_handler, STOP_PLAY
 
 if __name__ == "__main__":
     logger.info("Starting an application...")
@@ -37,6 +38,7 @@ if __name__ == "__main__":
 
     app.add_handlers([
         CallbackQueryHandler(run_immediately_callback_handler, pattern=RUN_IMMEDIATELY, block=False),
+        CallbackQueryHandler(stop_play_callback_handler, pattern=STOP_PLAY, block=False),
     ])
 
     app.run_polling()

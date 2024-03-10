@@ -8,7 +8,7 @@ from sqlalchemy.orm import (
 class Base(MappedAsDataclass, DeclarativeBase):
     pass
 
-class AudioFiles(Base):
+class AudioFile(Base):
     """
     Таблица базы данных, в которую вносится информация:
 
@@ -22,3 +22,4 @@ class AudioFiles(Base):
     id:         Mapped[int] = mapped_column(primary_key=True, nullable=False)
     message_id: Mapped[int] = mapped_column(nullable=False, index=True, unique=True)
     file_name:  Mapped[str] = mapped_column(nullable=False, index=True, unique=True)
+    duration:   Mapped[int] = mapped_column(nullable=False)

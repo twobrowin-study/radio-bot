@@ -19,6 +19,8 @@ from sqlalchemy.orm import sessionmaker
 from pathlib import Path
 from loguru import logger
 
+from vlc import MediaPlayer
+
 from radio.config_model import ConfigYaml
 from radio.db_model import Base
 
@@ -58,12 +60,22 @@ class RadioApplication(Application):
             [InlineKeyboardButton(text=text, callback_data=callback_data)]
             for callback_data,text in self.config.audio_reply.items()
         ])
+        
+        stop_reply_markup = {
+                key: value
+                for key, value in self.config.audio_reply.items()
+                if key != 'run_immediately'
+            } | { 'stop_play': self.config.stop_play }
+        self.stop_relpy_markup = InlineKeyboardMarkup([
+            [InlineKeyboardButton(text=text, callback_data=callback_data)]
+            for callback_data,text in stop_reply_markup.items()
+        ])
 
         self.file_dir = Path(self.config.file_dir)
 
         self.db_engine = create_engine(
             self.config.db_uri, 
-            echo=True,
+            echo=False,
             pool_size=10,
             max_overflow=2,
             pool_recycle=300,
@@ -71,6 +83,8 @@ class RadioApplication(Application):
             pool_use_lifo=True
         )
         self.db_sessionmaker = sessionmaker(bind = self.db_engine)
+
+        self.media_player: MediaPlayer = None
 
     async def _post_init(self, application: Application) -> None:
         """

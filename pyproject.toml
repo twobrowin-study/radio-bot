@@ -8,7 +8,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "3.12.2"
-python-telegram-bot = "^21.0.1"
+python-telegram-bot = {version = "^21.0.1", extras = ["job-queue"]}
 pydantic = "2.6.3"
 pydantic-settings = "2.2.1"
 PyYAML = "^6.0"

@@ -32,6 +32,7 @@ class ConfigYaml(BaseSettings):
     help_markdown: str
     
     audio_reply: dict[str, str]
+    stop_play:   str
     
 def create_config() -> ConfigYaml:
     """

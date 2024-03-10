@@ -10,3 +10,5 @@ help_markdown: |
 
 audio_reply:
   run_immediately: 🚀 Запустить немедленно
+
+stop_play: ⛔ Остановить
