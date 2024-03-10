@@ -1,0 +1,5 @@
+.env
+.vscode
+audiofiles
+*.sqlite
+__pycache__

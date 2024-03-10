@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "radio-bot"
+version = "1.0.0"
+description = "Телеграм бот для автоматизации работы радиста"
+authors = ["Dubrovin Egor <dubrovinen@bmstu.ru>", "Stepanova Daria", "Ilya Reznikov"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.12.2"
+python-telegram-bot = "^21.0.1"
+pydantic = "2.6.3"
+pydantic-settings = "2.2.1"
+PyYAML = "^6.0"
+loguru = "*"
+SQLAlchemy = "2.0.28"
+python-vlc = "3.0.20123"
+
+[tool.poetry.dev-dependencies]
+mypy = "*"
+dotenv-linter = "*"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
