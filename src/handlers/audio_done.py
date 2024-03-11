@@ -1,5 +1,6 @@
 from telegram import Bot
 from telegram.ext import CallbackContext
+from telegram.error import BadRequest
 
 from loguru import logger
 
@@ -14,8 +15,11 @@ async def audio_stop_callback(context: CallbackContext) -> None:
 
     logger.info(f"Propably done playng audio file {audio_file.file_name} - reseting buttons")
 
-    await bot.edit_message_reply_markup(
-        chat_id = app.config.interact_id,
-        message_id = audio_file.message_id,
-        reply_markup = app.audio_relpy_markup
-    )
+    try:
+        await bot.edit_message_reply_markup(
+            chat_id = app.config.interact_id,
+            message_id = audio_file.message_id,
+            reply_markup = app.audio_relpy_markup
+        )
+    except BadRequest:
+        logger.info("Message was not modified")

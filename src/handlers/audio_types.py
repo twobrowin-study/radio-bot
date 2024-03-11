@@ -26,7 +26,7 @@ async def audio_types_handler(update: Update, context: ContextTypes.DEFAULT_TYPE
     duration      = None
 
     if update.message.voice:
-        logger.info(f"Got voice from {update.effective_user.id}")
+        logger.info(f"Got voice from {user_name}")
 
         file_name = f"voice_{user_name}_{uniq_datetime}.ogg"
         duration  = update.message.voice.duration
@@ -37,7 +37,7 @@ async def audio_types_handler(update: Update, context: ContextTypes.DEFAULT_TYPE
         )
 
     if update.message.audio:
-        logger.info(f"Got audio from {update.effective_user.id}")
+        logger.info(f"Got audio from {user_name}")
 
         file_extention = update.message.audio.file_name.split('.')[-1]
         file_name = f"{update.message.audio.performer or f"audio_{user_name}"}_{update.message.audio.title or uniq_datetime}.{file_extention}"
